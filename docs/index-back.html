@@ -90,161 +90,111 @@
       ];
 
       const advancedValues = [
-        { id: "1", value: "张三", category: "Bayern Munich", color: "green" },
+        { id: "1", value: "张三", team: "Bayern Munich", color: "green" },
         {
           id: "2",
           value: "Robert Lewandowski",
-          category: "Bayern Munich",
+          team: "Bayern Munich",
           color: "blue",
         },
         {
           id: "3",
           value: "Thomas Muller",
-          category: "Bayern Munich",
+          team: "Bayern Munich",
           color: "red",
         },
         {
           id: "4",
           value: "Roman Burki",
-          category: "Borussia Dortmund",
+          team: "Borussia Dortmund",
           color: "orange",
         },
         {
           id: "5",
           value: "Jadon Sancho",
-          category: "Borussia Dortmund",
+          team: "Borussia Dortmund",
           color: "black",
         },
         {
           id: "6",
           value: "Marco Reus",
-          category: "Borussia Dortmund",
+          team: "Borussia Dortmund",
           color: "yellow",
         },
-        { id: "7", value: "李四", category: "Schalke 04", color: "purple" },
+        { id: "7", value: "李四", team: "Schalke 04", color: "purple" },
         {
           id: "8",
           value: "Bastian Oczipka",
-          category: "Schalke 04",
+          team: "Schalke 04",
           color: "indigo",
         },
         {
           id: "9",
           value: "Weston McKennie",
-          category: "Schalke 04",
+          team: "Schalke 04",
           color: "violet",
         },
         {
           id: "10",
           value: "Joshua Kimmich",
-          category: "Manchester City",
+          team: "Manchester City",
           color: "green",
         },
         {
           id: "11",
-          value: "Ilkay Gundmogan",
-          category: "Manchester City",
+          value: "Ilkay Gundogan",
+          team: "Manchester City",
           color: "blue",
         },
-        {
-          id: "12",
-          value: "Rmodri",
-          category: "Manchester City",
-          color: "red",
-        },
-        {
-          id: "13",
-          value: "王二麻子",
-          category: "Real Madrid",
-          color: "orange",
-        },
-        {
-          id: "14",
-          value: "Luka Modric",
-          category: "Real Madrid",
-          color: "black",
-        },
-        {
-          id: "15",
-          value: "Casemiro",
-          category: "Real Madrid",
-          color: "yellow",
-        },
+        { id: "12", value: "Rodri", team: "Manchester City", color: "red" },
+        { id: "13", value: "王二麻子", team: "Real Madrid", color: "orange" },
+        { id: "14", value: "Luka Modric", team: "Real Madrid", color: "black" },
+        { id: "15", value: "Casemiro", team: "Real Madrid", color: "yellow" },
         {
           id: "16",
           value: "Sergio Ramos",
-          category: "Real Madrid",
+          team: "Real Madrid",
           color: "purple",
         },
-        {
-          id: "17",
-          value: "Toni Kroos",
-          category: "Real Madrid",
-          color: "indigo",
-        },
-        { id: "18", value: "周五", category: "Real Madrid", color: "violet" },
+        { id: "17", value: "Toni Kroos", team: "Real Madrid", color: "indigo" },
+        { id: "18", value: "周五", team: "Real Madrid", color: "violet" },
         {
           id: "19",
           value: "Gianluigi Donnarumma",
-          category: "AC Milan",
+          team: "AC Milan",
           color: "green",
         },
-        {
-          id: "20",
-          value: "Lorenzo Insigne",
-          category: "AC Milan",
-          color: "blue",
-        },
-        { id: "21", value: "Andrea Pirlo", category: "AC Milan", color: "red" },
-        {
-          id: "22",
-          value: "Mauro Icardi",
-          category: "AC Milan",
-          color: "orange",
-        },
-        { id: "23", value: "赵六", category: "AC Milan", color: "black" },
+        { id: "20", value: "Lorenzo Insigne", team: "AC Milan", color: "blue" },
+        { id: "21", value: "Andrea Pirlo", team: "AC Milan", color: "red" },
+        { id: "22", value: "Mauro Icardi", team: "AC Milan", color: "orange" },
+        { id: "23", value: "赵六", team: "AC Milan", color: "black" },
         {
           id: "24",
           value: "Gianluigi Buffon",
-          category: "AC Milan",
+          team: "AC Milan",
           color: "yellow",
         },
         {
           id: "25",
           value: "Mattia De Sciglio",
-          category: "AC Milan",
+          team: "AC Milan",
           color: "purple",
         },
-        {
-          id: "26",
-          value: "Paulo Dybala",
-          category: "AC Milan",
-          color: "indigo",
-        },
+        { id: "26", value: "Paulo Dybala", team: "AC Milan", color: "indigo" },
         {
           id: "27",
           value: "Mario Mandzukic",
-          category: "AC Milan",
+          team: "AC Milan",
           color: "violet",
         },
         {
           id: "28",
           value: "Cristiano Ronaldo",
-          category: "Juventus",
+          team: "Juventus",
           color: "green",
         },
-        {
-          id: "29",
-          value: "Paulo Dybala",
-          category: "Juventus",
-          color: "blue",
-        },
-        {
-          id: "30",
-          value: "Sergio Busquets",
-          category: "Juventus",
-          color: "red",
-        },
+        { id: "29", value: "Paulo Dybala", team: "Juventus", color: "blue" },
+        { id: "30", value: "Sergio Busquets", team: "Juventus", color: "red" },
       ];
 
       var quill = new Quill("#editor", {
@@ -294,23 +244,6 @@
 
       Quill.register(StyledMentionBlot);
 
-      const ALL_TAB_KEY = "ALL_TAB_KEY";
-
-      function filteredData(data = []) {
-        const reduceData = data
-          .filter((item) => !item.disabled)
-          .reduce((acc, item) => {
-            if (!acc[item.category]) {
-              acc[item.category] = [];
-            }
-            acc[item.category].push(item);
-            return acc;
-          }, {});
-        return {
-          [ALL_TAB_KEY]: data,
-          ...reduceData,
-        };
-      }
       var quill2 = new Quill("#editor2", {
         placeholder: "Start by typing @ for mentions",
         modules: {
@@ -318,54 +251,11 @@
             allowedChars: /^[A-Za-z\sÅÄÖåäö\u4e00-\u9fa5]*$/,
             mentionDenotationChars: ["@"],
             positioningStrategy: "fixed",
-            menuType: "tab", // ul | tab
-            renderTabMenu(mentionContainer, containerUL, data) {
-              // 必须创建一个div标签
-              const divHeader = document.createElement("div");
-              divHeader.className = "tab-header";
-              const tabData = filteredData(data);
-              const tabs = Object.keys(tabData);
-              for (let i = 0; i < tabs.length; i++) {
-                const div = document.createElement("div");
-                div.className = "tab-item";
-                if (tabs[i] === "ALL_TAB_KEY") {
-                  div.className += " active";
-                }
-                div.dataset.tab = tabs[i];
-                div.innerText = tabs[i];
-                divHeader.appendChild(div);
-              }
-              divHeader.addEventListener("mouseup", (e) => {
-                console.log("divHeader click", e);
-                // 获取当前点击对象的 tab 值
-                const currentTab = e.target.dataset.tab;
-                // 修改当前激活的 tab
-                if (divHeader.querySelector(".active")) {
-                  divHeader.querySelector(".active").classList.remove("active");
-                }
-                e.target.classList.add("active");
-                const liItems = containerUL.querySelectorAll(
-                  ".ql-mention-list-item"
-                );
-                // 显示对应选项卡的 li 元素，隐藏其他 li 元素
-                liItems.forEach((liItem) => {
-                  const category = liItem.getAttribute("data-category");
-
-                  if (currentTab === "ALL_TAB_KEY" || currentTab === category) {
-                    liItem.style.display = "block";
-                  } else {
-                    liItem.style.display = "none";
-                  }
-                });
-                e.preventDefault();
-                e.stopImmediatePropagation();
-              });
-              return divHeader;
-            },
             renderItem: (data) => {
               if (data.disabled) {
                 const div = document.createElement("div");
-                div.style = "background-color:#ccc;margin:0 -20px;padding:4px";
+                div.style =
+                  "height:10px;line-height:10px;font-size:10px;background-color:#ccc;margin:0 -20px;padding:4px";
                 div.innerText = data.value;
                 return div;
               }
@@ -394,13 +284,13 @@
               var currentTeam;
               for (i = 0; i < matches.length; i++) {
                 var match = matches[i];
-                if (currentTeam !== match.category) {
+                if (currentTeam !== match.team) {
                   matchesWithGroupHeaders.push({
-                    id: match.category,
-                    value: match.category,
+                    id: match.team,
+                    value: match.team,
                     disabled: true,
                   });
-                  currentTeam = match.category;
+                  currentTeam = match.team;
                 }
                 matchesWithGroupHeaders.push(match);
               }
@@ -418,7 +308,6 @@
               "target",
               "disabled",
               "color",
-              "category",
             ],
             blotName: "styled-mention",
           },
@@ -435,7 +324,6 @@
             denotationChar: "@",
             id: "123abc",
             value: "Hello World",
-            category: "Juventus",
           },
           true
         );

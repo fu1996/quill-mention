@@ -37,6 +37,7 @@ class Mention {
       onSelect(item, insertItem) {
         insertItem(item);
       },
+      menuType: "ul", // ul or tab
       mentionDenotationChars: ["@"],
       showDenotationChar: true,
       allowedChars: /^[a-zA-Z0-9_]*$/,
@@ -72,6 +73,8 @@ class Mention {
       listItemClass: "ql-mention-list-item",
       mentionContainerClass: "ql-mention-list-container",
       mentionListClass: "ql-mention-list",
+      tabContainerClass: "ql-mention-tabs",
+      tabContainerId: "ql-mention-tabs",
       spaceAfterInsert: true,
       selectKeys: [Keys.ENTER],
     };
@@ -381,13 +384,34 @@ class Mention {
     }
   }
 
+  // 渲染菜单的地方，要将其改为Tab切换的形式
   renderList(mentionChar, data, searchTerm) {
     if (data && data.length > 0) {
       this.removeLoading();
-
       this.values = data;
       this.mentionList.innerText = "";
-
+      // render tab menu
+      const isTabMode = this.options.menuType === "tab";
+      if (isTabMode) {
+        const tabContainer = document.createElement("div");
+        tabContainer.className = this.options.tabContainerClass;
+        tabContainer.id = this.options.tabContainerId;
+        // 获取参考元素（当前标签内的第一个子元素）如果是 div 就是tab 组件
+        let firstElement = this.mentionContainer.firstChild;
+        // 如果第一个元素是div标签的话就先删除掉
+        if (firstElement.id === this.options.tabContainerId) {
+          this.mentionContainer.removeChild(firstElement);
+        }
+        const tabBox = this.options.renderTabMenu(
+          this.mentionContainer,
+          this.mentionList,
+          data
+        );
+        tabContainer.append(tabBox);
+        // TODO: 后期可以根据位置判断这里是insert 还是append
+        // insert
+        this.mentionContainer.insertBefore(tabContainer, this.mentionList);
+      }
       var initialSelection = -1;
 
       for (let i = 0; i < data.length; i += 1) {
@@ -396,6 +420,9 @@ class Mention {
         li.className = this.options.listItemClass
           ? this.options.listItemClass
           : "";
+        if (isTabMode) {
+          li.className += " quill-mention-item-tab";
+        }
         if (data[i].disabled) {
           li.className += " disabled";
           li.setAttribute("aria-hidden", "true");

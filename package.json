@@ -28,6 +28,7 @@
     "eslint": "^8.1.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "postcss": "^8.4.33",
     "prettier": "2.4.1",
     "rollup": "^2.58.3",
     "rollup-plugin-local-resolve": "^1.0.7",
